@@ -5,6 +5,7 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Todo from "../views/Todo.vue";
+import Suggestion from "../views/Suggestions.vue"
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,8 @@ const routes = [
   { path: "/signup", name: "signup", component: Signup },
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
-  { path: "/todo", name: "todo", component: Todo}
+  { path: "/todo", name: "todo", component: Todo },
+  { path: "/suggestions", name: "suggestions", component: Suggestion }
 ]
 
 const router = new VueRouter({

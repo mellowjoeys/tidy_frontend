@@ -1,17 +1,25 @@
 <template>
   <div class="todo">
     <h1>  </h1>
-    <div class="start">
-    </div>
+    <div class="nav">
+      <router-link v-bind:to="'/suggestions/'">
+        <h3>Suggestions</h3>
+      </router-link>
+    </div> <!-- end of nav bar -->
     <div class="remaining-tasks">
       <h2>To-do</h2>
-      <div v-for="remainingChore in remainingChores">
-        <h2>{{ remainingChore.name }}</h2>
+      <div v-for="chore in currentUser.remaining_chores">
+        <ul>
+          <li>{{ chore.name }}</li>
+        </ul>
       </div>
     </div> <!-- end of remaining-tasks -->
     <div class="completed-tasks">
-      <div v-for="completedChore in completedChores">
-        <h2>{{ completedChore.name }}</h2>
+      <h2>Completed</h2>
+      <div v-for="chore in currentUser.completed_chores">
+        <ul>
+          <li>{{ chore.name }}</li>
+        </ul>
       </div>
     </div> <!-- end of completed-tasks -->
   </div>
@@ -26,21 +34,19 @@ import axios from "axios"
 export default {
   data: function() {
     return {
-      currentUser: {},
-      remainingChores: [],
-      completedChores: []
+      currentUser: {}
     };
   },
   created: function() {
     axios
       .get("/api/users/current")
       .then(response => {
-        this.currentUser = response.data
-      })
-      .then(this.remainingChores =  this.currentUser.remaining_chores)
-      .then(this.completedChores = this.currentUser.completed_chores);
+        console.log(response.data)
+        this.currentUser = response.data;
+      });      
+      // .then(this.remainingChores =  this.currentUser[:remaining_chores];
+      // .then(this.completedChores = this.currentUser[:completed_chores];
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
