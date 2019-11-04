@@ -41,7 +41,7 @@ export default {
     axios
       .get("/api/users/current")
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.currentUser = response.data;
       });      
       // .then(this.remainingChores =  this.currentUser[:remaining_chores];
