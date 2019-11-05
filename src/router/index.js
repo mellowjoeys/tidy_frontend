@@ -5,7 +5,8 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Todo from "../views/Todo.vue";
-import Suggestion from "../views/Suggestions.vue"
+import Suggestions from "../views/Suggestions.vue"
+import ChoresNew from "../views/ChoresNew.vue"
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,8 @@ const routes = [
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
   { path: "/todo", name: "todo", component: Todo },
-  { path: "/suggestions", name: "suggestions", component: Suggestion }
+  { path: "/suggestions", name: "suggestions", component: Suggestions },
+  { path: "/chores/new", name: "chores-new", component: ChoresNew }
 ]
 
 const router = new VueRouter({

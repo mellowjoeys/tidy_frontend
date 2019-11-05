@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="suggestions">
       <router-link v-bind:to="'/todo'">
         <h2>To Do</h2>
       </router-link>
