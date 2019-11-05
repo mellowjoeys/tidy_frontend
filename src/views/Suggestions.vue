@@ -3,24 +3,22 @@
     <h1>Suggestions</h1>
     <div class="home">
       <div v-for="chore in house.chores">
-        <h2 v-on:click="showChore(chore)">{{ chore.name }}</h2>
+        <h2 v-on:click="showChore(chore)"> 
+          <div> {{ chore.name }} </div>
+        </h2>
           <p>Value: {{ chore.value }}</p>
-          </p>
 
 
         <div v-if="chore === currentChore">
-          <p>My Suggested Value: 
-          <input type="text" v-model="mySuggestedValue">
           <div v-for="suggestion in chore.suggestions">
-            <h4>{{ suggestion }} </h4>
+            <p>{{ suggestion.belongs_to.user.first_name}} suggests:</p>
+            <p>{{ suggestion.value }} </p>
           </div>   
           <div class="edit-form-section">
             <h4>Suggest a value</h4>
-
             <div>
-              Value: <input type="number" v-model="chore.value">
+              Value: <input type="number" v-model="mySuggestedValue">
             </div>
-              
             <button v-on:click="suggestValue(chore)">Suggest</button>
           </div><!-- end of .edit-form-section -->
         </div>
@@ -65,7 +63,7 @@ export default {
     showChore: function(choreObject) {
       if (this.currentChore != choreObject) {
         this.currentChore = choreObject;
-        this.currentChore.suggestions.forEach(function(suggestion) {
+        this.currentChore.suggestions.forEach((suggestion) => {
           if (suggestion.user_id === this.currentUser.id) {
             this.mySuggestedValue = suggestion.value
           }
