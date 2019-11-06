@@ -19,7 +19,7 @@ const routes = [
   { path: "/todo", name: "todo", component: Todo },
   { path: "/suggestions", name: "suggestions", component: Suggestions },
   { path: "/chores/new", name: "chores-new", component: ChoresNew },
-  { path: "/userchores/new", name: "user-chores-new", component: UserChoresNew}
+  { path: "/user_chores/new", name: "user-chores-new", component: UserChoresNew}
 ]
 
 const router = new VueRouter({

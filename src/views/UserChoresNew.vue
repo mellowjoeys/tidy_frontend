@@ -45,7 +45,7 @@ export default {
       availableChores: [], // user can refresh and see updated list, then use action cables to auto refresh. 
       chosenChores: [],
       housemates: [],
-      start_of_week: ""
+      house: {}
      };
   },
   created: function() {
@@ -53,6 +53,7 @@ export default {
       .get("/api/users/current")
       .then(response => {
         this.currentUser = response.data;
+        updateChosenList(); // test if this line works. 
         axios
           .get("/api/users?house_id=" + this.currentUser.house_id)
           .then(response => {
@@ -67,20 +68,25 @@ export default {
       .then(response => {
         this.availableChores = response.data;
       });
-    // axios // to define the start_of_week
-    //   .
   },
   methods: {
     createUserChore: function(choreObject) {
       var params = {
         chore_id: choreObject.id,
-        start_of_week: "November 3, 2019",
       }
       axios
-        .post("/api/userchores", params)
+        .post("/api/user_chores", params)
         .then(response => {
-          this.$router.push("/userchores/new");
-        }); // unsure if app should go here again when creating userchore. 
+          this.$router.push("/user_chores/new"); // this will not "reload" the page. find another solution.
+        }); // 
+      axios
+        .get("/api/houses" + this.currentUser.house_id)
+        .then(response => {
+          this.house = response.data
+        });
+    },
+    updateChosenList: function() {
+      this.chosenChores = this.currentUser.chores_next_week
     }
   }// make urls snakecase
 };

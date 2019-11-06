@@ -7,7 +7,7 @@
       </router-link>
     </div> <!-- end of nav bar -->
     <div class="remaining-tasks">
-      <h2>To-do</h2>
+      <h2>To-Do</h2>
       <div v-for="chore in currentUser.remaining_chores">
         <ul>
           <li>{{ chore.name }}</li>
