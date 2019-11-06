@@ -54,10 +54,11 @@ export default {
       .get("/api/users/current")
       .then(response => {
         this.currentUser = response.data;
-      axios.get("/api/houses/" + this.currentUser.house_id)
-      .then(response => {
-        this.house = response.data
-      });
+        
+        axios.get("/api/houses/" + this.currentUser.house_id)
+        .then(response => {
+          this.house = response.data
+        });
       })
   },
   methods: {
