@@ -5,7 +5,7 @@
       </router-link>
     <h1>Suggestions</h1>
     <div class="home">
-      <div v-for="chore in house.chores">
+      <div v-for="chore in house.unapproved_chores">
         <h2 v-on:click="showChore(chore)"> 
           <div> {{ chore.name }} </div>
         </h2>
@@ -54,7 +54,7 @@ export default {
       .get("/api/users/current")
       .then(response => {
         this.currentUser = response.data;
-        
+
         axios.get("/api/houses/" + this.currentUser.house_id)
         .then(response => {
           this.house = response.data

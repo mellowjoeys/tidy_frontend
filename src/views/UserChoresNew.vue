@@ -1,7 +1,6 @@
 <template>
   <div class="user-chores-new">
     <h1>Tidy Time</h1>
-
     <div class="available-chores">
       <h3>Available</h3>
       <ul v-for="availableChore in availableChores">
@@ -45,7 +44,7 @@ export default {
       availableChores: [], // user can refresh and see updated list, then use action cables to auto refresh. 
       chosenChores: [],
       housemates: [],
-      house: {}
+      // house: {} //may not be needed at all. tbd. 
      };
   },
   created: function() {
@@ -53,20 +52,20 @@ export default {
       .get("/api/users/current")
       .then(response => {
         this.currentUser = response.data;
-        updateChosenList(); // test if this line works. 
+        this.updateChosenList(); // test if this line works. 
         axios
           .get("/api/users?house_id=" + this.currentUser.house_id)
           .then(response => {
             this.housemates = response.data;
             this.housemates.forEach(housemate => {
-              housemate["value"] = 0;
+              housemate["value"] = housemate.value_of_next_week_chores;
             })
           });
-      });
-    axios
-      .get("/api/chores?house=true")
-      .then(response => {
-        this.availableChores = response.data;
+        axios
+          .get("/api/houses/" + this.currentUser.house_id)
+          .then(response => {
+            this.availableChores = response.data.unchosen_chores
+          });
       });
   },
   methods: {
@@ -75,18 +74,22 @@ export default {
         chore_id: choreObject.id,
       }
       axios
-        .post("/api/user_chores", params)
-        .then(response => {
-          this.$router.push("/user_chores/new"); // this will not "reload" the page. find another solution.
-        }); // 
+        .post("/api/user_chores", params); // 
+      // axios
+      //   .get("/api/houses/" + this.currentUser.house_id)
+      //   .then(response => {
+      //     this.house = response.data
+      //   });
       axios
-        .get("/api/houses" + this.currentUser.house_id)
+        .get("/api/users/current")
         .then(response => {
-          this.house = response.data
+
+          this.currentUser = response.data;
+          this.updateChosenList(); // test if this line works. 
         });
     },
     updateChosenList: function() {
-      this.chosenChores = this.currentUser.chores_next_week
+      this.chosenChores = this.currentUser.chosen_chores_next_week
     }
   }// make urls snakecase
 };
