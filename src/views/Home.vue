@@ -3,8 +3,7 @@
     <h1>{{ message }}</h1>
     <div class="start">
       <router-link to="/signup"><h2>Sign up</h2></router-link> |||| 
-      <router-link to="/login"><h2>Log in</h2></router-link> ||||
-      <router-link to="/todo"><h2>To Do</h2></router-link> ||||
+      <router-link to="/login"><h2>Log in</h2></router-link>
 
     </div>
 

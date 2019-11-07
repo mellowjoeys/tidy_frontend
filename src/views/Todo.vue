@@ -1,16 +1,27 @@
 <template>
   <div class="todo">
-    <h1>  </h1>
-    <div class="nav">
+    <div>
       <router-link v-bind:to="'/suggestions/'">
         <h3>Suggestions</h3>
       </router-link>
-    </div> <!-- end of nav bar -->
+    </div>
+    <div>
+      <router-link v-bind:to="'/user_chores/new'">
+        <h3>Draft</h3>
+      </router-link>
+    </div>
+    <div>
+      <router-link v-bind:to="'/logout'">
+        <h3>Logout</h3>
+      </router-link>
+    </div>
     <div class="remaining-tasks">
       <h2>To-Do</h2>
       <div v-for="chore in currentUser.remaining_chores">
         <ul>
           <li>{{ chore.name }}</li>
+          <button v-on:click="completeChore(chore)">Complete</button>
+
         </ul>
       </div>
     </div> <!-- end of remaining-tasks -->
@@ -43,10 +54,26 @@ export default {
       .then(response => {
         // console.log(response.data)
         this.currentUser = response.data;
+
       });      
       // .then(this.remainingChores =  this.currentUser[:remaining_chores];
       // .then(this.completedChores = this.currentUser[:completed_chores];
   },
-  methods: {}
+  methods: {
+    completeChore: function(chore) {
+      var params = {
+        chore_id: chore.id
+      }
+      axios
+        .patch("/api/user_chores", params)
+        .then(response => {
+          axios
+            .get("/api/users/current")
+            .then(response => {
+              this.currentUser = response.data;
+            });
+        });
+    }
+  }
 };
 </script>

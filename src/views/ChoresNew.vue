@@ -49,6 +49,9 @@ export default {
             console.log("success", response.data);
             this.$router.push("/suggestions")
           });
+      }
+      else {
+        console.log("Please add a value greater than 0")
       };
 
     }

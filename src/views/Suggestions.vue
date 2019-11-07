@@ -3,14 +3,15 @@
       <router-link v-bind:to="'/todo'">
         <h2>To Do</h2>
       </router-link>
+      <router-link v-bind:to="'/chores/new'">
+        <h2>Suggest Chore</h2>
+      </router-link>
     <h1>Suggestions</h1>
     <div class="home">
       <div v-for="chore in house.unapproved_chores">
         <h2 v-on:click="showChore(chore)"> 
           <div> {{ chore.name }} </div>
         </h2>
-          <p>Value: {{ chore.value }}</p>
-
 
         <div v-if="chore === currentChore">
           <div v-for="suggestion in chore.suggestions">
@@ -88,17 +89,23 @@ export default {
           chore_id: choreObject.id,
           value: this.newSuggestedValue
         };
-        axios.patch("/api/suggestions/" + this.currentSuggestionId, params);
-        this.newSuggestedValue = 0;
-        console.log("Suggestion successfully edited");
+        axios
+          .patch("/api/suggestions/" + this.currentSuggestionId, params)
+          .then(response => {
+            this.newSuggestedValue = 0;
+            console.log("Suggestion successfully edited");
+          });
       }
       else if (this.previousValue === 0 && this.newSuggestedValue > 0) {
         var params = {
           chore_id: choreObject.id,
           value: this.newSuggestedValue
         };
-        axios.post("/api/suggestions/", params);
-        console.log("Suggestion successfully added");
+        axios
+          .post("/api/suggestions/", params)
+          .then(response => {
+            console.log("Suggestion successfully added");
+          });
       }
       else {
         console.log("Please enter a value greater than 0.");

@@ -1,6 +1,16 @@
 <template>
   <div class="user-chores-new">
-    <h1>Tidy Time</h1>
+    <div>
+      <router-link v-bind:to="'/todo/'">
+        <h3>To-Do</h3>
+      </router-link>
+    </div>
+    <div>
+      <router-link v-bind:to="'/suggestions/'">
+        <h3>Suggestions</h3>
+      </router-link>
+    </div>
+    <h1>Tidy Draft</h1>
     <div class="available-chores">
       <h3>Available</h3>
       <ul v-for="availableChore in availableChores">
