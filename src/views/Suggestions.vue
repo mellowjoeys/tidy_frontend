@@ -83,8 +83,6 @@ export default {
     },
 
     suggestValue: function(choreObject) {
-      //I want to update a value if previousValue is not 0. If it is, create a suggestion. 
-
       if (this.previousValue > 0 && this.newSuggestedValue > 0) {
         var params = {
           id: this.currentSuggestionId,

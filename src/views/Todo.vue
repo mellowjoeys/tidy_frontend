@@ -52,12 +52,9 @@ export default {
     axios
       .get("/api/users/current")
       .then(response => {
-        // console.log(response.data)
         this.currentUser = response.data;
 
       });      
-      // .then(this.remainingChores =  this.currentUser[:remaining_chores];
-      // .then(this.completedChores = this.currentUser[:completed_chores];
   },
   methods: {
     completeChore: function(chore) {
