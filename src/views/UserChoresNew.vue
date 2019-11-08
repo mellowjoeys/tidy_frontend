@@ -11,6 +11,7 @@
       </router-link>
     </div>
     <h1>Tidy Draft</h1>
+      <h2>Current Turn: {{ currentDrafter.first_name }} </h2>
     <div class="available-chores">
       <h3>Available</h3>
       <ul v-for="availableChore in availableChores">
@@ -53,7 +54,9 @@ export default {
       currentUser: {},
       availableChores: [], // user can refresh and see updated list, then use action cables to auto refresh. 
       chosenChores: [],
-      housemates: []
+      housemates: [],
+      currentDrafter: {},
+      myTurn: false
      };
   },
   created: function() {
@@ -69,7 +72,9 @@ export default {
             this.housemates.forEach(housemate => {
               housemate["value"] = housemate.value_of_next_week_chores;
             })
-          });
+
+          })
+          .then(this.whoseTurn);
         axios
           .get("/api/houses/" + this.currentUser.house_id)
           .then(response => {
@@ -105,8 +110,15 @@ export default {
     },
     updateChosenList: function() {
       this.chosenChores = this.currentUser.chosen_chores_next_week
+    },
+    whoseTurn: function() {
+      this.currentDrafter = this.housemates[0];
+      this.housemates.forEach(housemate => {
+        if (housemate.value < this.currentDrafter.value) {
+          this.currentDrafter = housemate;
+        }
+      });
     }
-
   }
 };
 </script>
