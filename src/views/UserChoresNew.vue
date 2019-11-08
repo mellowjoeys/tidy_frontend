@@ -84,19 +84,30 @@ export default {
         chore_id: choreObject.id,
       }
       axios
-        .post("/api/user_chores", params); // 
+        .post("/api/user_chores", params)
+        .then(response => {
+          axios
+            .get("/api/users/current")
+            .then(response => {
+
+              this.currentUser = response.data;
+              this.updateChosenList(); // test if this line works. 
+              axios
+                .get("/api/users?house_id=" + this.currentUser.house_id)
+                .then(response => {
+                  this.housemates = response.data;
+                  this.housemates.forEach(housemate => {
+                    housemate["value"] = housemate.value_of_next_week_chores;
+                  })
+                });
+            });
+        });
       // axios
       //   .get("/api/houses/" + this.currentUser.house_id)
       //   .then(response => {
       //     this.house = response.data
       //   });
-      axios
-        .get("/api/users/current")
-        .then(response => {
 
-          this.currentUser = response.data;
-          this.updateChosenList(); // test if this line works. 
-        });
     },
     updateChosenList: function() {
       this.chosenChores = this.currentUser.chosen_chores_next_week

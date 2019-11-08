@@ -64,6 +64,8 @@ export default {
   },
   methods: {
     showChore: function(choreObject) {
+      this.previousValue = 0;
+      this.newSuggestedValue = 0;
       if (this.currentChore != choreObject) {
         this.currentChore = choreObject;
         this.currentChore.suggestions.forEach((suggestion) => {
@@ -94,6 +96,10 @@ export default {
           .then(response => {
             this.newSuggestedValue = 0;
             console.log("Suggestion successfully edited");
+            axios.get("/api/houses/" + this.currentUser.house_id)
+            .then(response => {
+              this.house = response.data
+            });
           });
       }
       else if (this.previousValue === 0 && this.newSuggestedValue > 0) {
