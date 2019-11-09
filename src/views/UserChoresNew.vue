@@ -1,6 +1,7 @@
 <template>
   <div class="user-chores-new">
     <div>
+      {{housemates}}
       <router-link v-bind:to="'/todo/'">
         <h3>To-Do</h3>
       </router-link>
@@ -11,12 +12,14 @@
       </router-link>
     </div>
     <h1>Tidy Draft</h1>
-      <h2>Current Turn: {{ currentDrafter.first_name }} </h2>
+      <h2>Current Turn: {{ currentDrafter.first_name  }} </h2>
     <div class="available-chores">
       <h3>Available</h3>
       <ul v-for="availableChore in availableChores">
         <p>{{ availableChore.name }}: {{ availableChore.value }}</p>
-        <button v-on:click="createUserChore(availableChore)">Add</button>
+        <div v-if="currentDrafter.id === currentUser.id">
+          <button v-on:click="createUserChore(availableChore)">Add</button>
+        </div>
       </ul>
     </div> <!-- available-chores end -->
 
@@ -69,14 +72,11 @@ export default {
           .get("/api/users?house_id=" + this.currentUser.house_id)
           .then(response => {
             this.housemates = response.data;
-            this.housemates.forEach(housemate => {
-              housemate["value"] = housemate.value_of_next_week_chores;
-            })
-
           })
           .then(this.whoseTurn);
         axios
-          .get("/api/houses/" + this.currentUser.house_id)
+          .get("/api/houses/" + this.currentUser.house_id) // house show action should show all users for a house, so we can get rid of .get("/api/users?house_id=" + this.currentUser.house_id)
+          // 
           .then(response => {
             this.availableChores = response.data.unchosen_chores
           });
@@ -96,17 +96,31 @@ export default {
 
               this.currentUser = response.data;
               this.updateChosenList();
-              axios
-                .get("/api/users?house_id=" + this.currentUser.house_id)
-                .then(response => {
-                  this.housemates = response.data;
-                  this.housemates.forEach(housemate => {
-                    housemate["value"] = housemate.value_of_next_week_chores;
-                  })
-                });
             });
-        });
 
+          axios
+            .get("/api/users?house_id=" + this.currentUser.house_id)
+            .then(response => {
+              this.housemates = response.data;
+            })
+            .then(this.whoseTurn);
+          axios
+            .get("/api/houses/" + this.currentUser.house_id) 
+            .then(response => {
+              this.availableChores = response.data.unchosen_chores
+            });
+            // .then(response => { 
+            //   axios
+            //     .get("/api/users?house_id=" + this.currentUser.house_id)
+            //     .then(response => {
+            //       this.housemates = response.data;
+            //       this.housemates.forEach(housemate => {
+            //         housemate["value"] = housemate.value_of_next_week_chores;
+            //       })
+            //     })
+            // });
+        })
+        .then(whoseTurn());
     },
     updateChosenList: function() {
       this.chosenChores = this.currentUser.chosen_chores_next_week

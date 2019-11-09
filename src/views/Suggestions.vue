@@ -43,7 +43,9 @@ export default {
   data: function() {
     return {
       currentUser: {},
-      house: {},
+      house: {
+                unapproved_chores: {}
+             },
       currentChore: {},
       previousValue: 0,
       newSuggestedValue: 0,
@@ -72,10 +74,10 @@ export default {
           if (suggestion.user_id === this.currentUser.id) {
             this.previousValue = suggestion.value;
             this.currentSuggestionId = suggestion.id;
-
           }
         });
-      } else {
+      } 
+      else {
         this.currentChore = {};
         this.previousValue = 0;
         this.currentSuggestionId = 0;
@@ -105,11 +107,20 @@ export default {
           chore_id: choreObject.id,
           value: this.newSuggestedValue
         };
-        axios
+        axios // can probably add to suggestiont o make it reset automatically here
           .post("/api/suggestions/", params)
           .then(response => {
             console.log("Suggestion successfully added");
-          });
+          })
+          .then(
+            axios
+              .get("/api/houses/" + this.currentUser.house_id)
+              .then(response => {
+                this.house = response.data
+              }) 
+          )
+          .then(this.showChore(choreObject));
+
       }
       else {
         console.log("Please enter a value greater than 0.");
