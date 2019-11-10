@@ -1,5 +1,6 @@
 <template>
   <div class="todo">
+    <div>House: {{ house.name }}</div><div>|| id: {{ house.id }}</div>
     <div>
       <router-link v-bind:to="'/suggestions/'">
         <h3>Suggestions</h3>
@@ -17,7 +18,7 @@
     </div>
     <div class="remaining-tasks">
       <h2>To-Do</h2>
-      <div v-for="chore in currentUser.remaining_chores">
+      <div v-for="chore in house.currentUser.remaining_chores">
         <ul>
           <li>{{ chore.name }}</li>
           <button v-on:click="completeChore(chore)">Complete</button>
@@ -27,7 +28,7 @@
     </div> <!-- end of remaining-tasks -->
     <div class="completed-tasks">
       <h2>Completed</h2>
-      <div v-for="chore in currentUser.completed_chores">
+      <div v-for="chore in house.currentUser.completed_chores">
         <ul>
           <li>{{ chore.name }}</li>
         </ul>
@@ -45,12 +46,13 @@ import axios from "axios"
 export default {
   data: function() {
     return {
-      currentUser: {}
+      currentUser: {},
+      house: {}
     };
   },
   created: function() {
     axios
-      .get("/api/users/current")
+      .get("/api/houses/current")
       .then(response => {
         this.currentUser = response.data;
 
