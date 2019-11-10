@@ -1,5 +1,6 @@
 <template>
   <div class="todo">
+    {{house}}
     <div>House: {{ house.name }}</div><div>|| id: {{ house.id }}</div>
     <div>
       <router-link v-bind:to="'/suggestions/'">
@@ -18,21 +19,21 @@
     </div>
     <div class="remaining-tasks">
       <h2>To-Do</h2>
-      <div v-for="chore in house.currentUser.remaining_chores">
+      <!-- <div v-for="chore in house.current_user.remaining_chores">
         <ul>
           <li>{{ chore.name }}</li>
           <button v-on:click="completeChore(chore)">Complete</button>
 
         </ul>
-      </div>
+      </div> -->
     </div> <!-- end of remaining-tasks -->
     <div class="completed-tasks">
       <h2>Completed</h2>
-      <div v-for="chore in house.currentUser.completed_chores">
+<!--       <div v-for="chore in house.current_user.completed_chores">
         <ul>
           <li>{{ chore.name }}</li>
         </ul>
-      </div>
+      </div> -->
     </div> <!-- end of completed-tasks -->
   </div>
 </template>
@@ -46,7 +47,6 @@ import axios from "axios"
 export default {
   data: function() {
     return {
-      currentUser: {},
       house: {}
     };
   },
@@ -54,7 +54,7 @@ export default {
     axios
       .get("/api/houses/current")
       .then(response => {
-        this.currentUser = response.data;
+        this.house = response.data;
 
       });      
   },
@@ -65,13 +65,13 @@ export default {
       }
       axios
         .patch("/api/user_chores", params)
-        .then(response => {
-          axios
-            .get("/api/users/current")
-            .then(response => {
-              this.currentUser = response.data;
-            });
-        });
+        // .then(response => {
+        //   axios
+        //     .get("/api/users/current")
+        //     .then(response => {
+        //       this.currentUser = response.data;
+        //     });
+        // });
     }
   }
 };
