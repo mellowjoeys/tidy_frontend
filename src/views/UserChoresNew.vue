@@ -35,7 +35,7 @@
       <h3>Housemates</h3>
       <ul v-for="housemate in housemates">
         <p>
-          {{ housemate.first_name }}: {{ housemate.value }} 
+          {{ housemate.first_name }}: {{ housemate.next_week_net_value }} 
           <br> <!-- linebreak and housemate id line is only to identify housemate with same name in development -->
           id: {{ housemate.id }}
         </p>
@@ -58,8 +58,7 @@ export default {
       availableChores: [], // user can refresh and see updated list, then use action cables to auto refresh. 
       chosenChores: [],
       housemates: [],
-      currentDrafter: {},
-      myTurn: false
+      currentDrafter: {}
      };
   },
   created: function() {
@@ -103,7 +102,7 @@ export default {
             .then(response => {
               this.housemates = response.data;
             })
-            .then(this.whoseTurn);
+            .then(this.whoseTurn());
           axios
             .get("/api/houses/" + this.currentUser.house_id) 
             .then(response => {
@@ -128,7 +127,7 @@ export default {
     whoseTurn: function() {
       this.currentDrafter = this.housemates[0];
       this.housemates.forEach(housemate => {
-        if (housemate.value < this.currentDrafter.value) {
+        if (housemate.next_week_net_value < this.currentDrafter.next_week_net_value) {
           this.currentDrafter = housemate;
         }
       });
