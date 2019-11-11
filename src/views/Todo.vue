@@ -19,21 +19,21 @@
     </div>
     <div class="remaining-tasks">
       <h2>To-Do</h2>
-      <!-- <div v-for="chore in house.current_user.remaining_chores">
+      <div v-for="chore in house.current_user.remaining_chores">
         <ul>
           <li>{{ chore.name }}</li>
           <button v-on:click="completeChore(chore)">Complete</button>
 
         </ul>
-      </div> -->
+      </div>
     </div> <!-- end of remaining-tasks -->
     <div class="completed-tasks">
       <h2>Completed</h2>
-<!--       <div v-for="chore in house.current_user.completed_chores">
+      <div v-for="chore in house.current_user.completed_chores">
         <ul>
           <li>{{ chore.name }}</li>
         </ul>
-      </div> -->
+      </div>
     </div> <!-- end of completed-tasks -->
   </div>
 </template>
