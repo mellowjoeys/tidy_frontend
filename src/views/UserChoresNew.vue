@@ -84,7 +84,7 @@ export default {
   methods: {
     createUserChore: function(choreObject) {
       var params = {
-        chore_id: choreObject.id,
+        chore_id: choreObject.id
       }
       axios
         .post("/api/user_chores", params)
@@ -119,10 +119,10 @@ export default {
             //     })
             // });
         })
-        .then(whoseTurn());
+        .then(this.whoseTurn());
     },
     updateChosenList: function() {
-      this.chosenChores = this.currentUser.chosen_chores_next_week
+      this.chosenChores = this.currentUser.chosen_chores_next_week;
     },
     whoseTurn: function() {
       this.currentDrafter = this.housemates[0];

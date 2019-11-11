@@ -8,6 +8,7 @@ import Todo from "../views/Todo.vue";
 import Suggestions from "../views/Suggestions.vue"
 import ChoresNew from "../views/ChoresNew.vue"
 import UserChoresNew from "../views/UserChoresNew.vue"
+import UsersIndex from "../views/UserIndex.vue"
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,8 @@ const routes = [
   { path: "/todo", name: "todo", component: Todo },
   { path: "/suggestions", name: "suggestions", component: Suggestions },
   { path: "/chores/new", name: "chores-new", component: ChoresNew },
-  { path: "/user_chores/new", name: "user-chores-new", component: UserChoresNew}
+  { path: "/user_chores/new", name: "user-chores-new", component: UserChoresNew},
+  { path: "/users/", name: "users-index", component: UsersIndex},
 ]
 
 const router = new VueRouter({
