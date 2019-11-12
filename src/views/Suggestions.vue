@@ -1,11 +1,5 @@
 <template>
   <div class="suggestions">
-      <router-link v-bind:to="'/todo'">
-        <h2>To Do</h2>
-      </router-link>
-      <router-link v-bind:to="'/chores/new'">
-        <h2>Suggest Chore</h2>
-      </router-link>
     <h1>Suggestions</h1>
     <div class="home">
       <div v-for="chore in house.unapproved_chores">

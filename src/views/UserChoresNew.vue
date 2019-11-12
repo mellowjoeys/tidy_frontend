@@ -1,16 +1,5 @@
 <template>
   <div class="user-chores-new">
-    <div>
-      {{housemates}}
-      <router-link v-bind:to="'/todo/'">
-        <h3>To-Do</h3>
-      </router-link>
-    </div>
-    <div>
-      <router-link v-bind:to="'/suggestions/'">
-        <h3>Suggestions</h3>
-      </router-link>
-    </div>
     <h1>Tidy Draft</h1>
       <h2>Current Turn: {{ currentDrafter.first_name  }} </h2>
     <div class="available-chores">
