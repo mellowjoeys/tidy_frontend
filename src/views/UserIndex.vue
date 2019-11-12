@@ -1,6 +1,8 @@
 <template>
   <div class="users-index">
     <h1>{{house.name}}</h1>
+    <p>House id: {{ house.id }}</p>
+
     <h1>Housemates: </h1>
     <div v-for="user in house.users">
       <div v-if="user.id !== house.current_user.id">
