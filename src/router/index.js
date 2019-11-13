@@ -21,7 +21,7 @@ const routes = [
   { path: "/suggestions", name: "suggestions", component: Suggestions },
   { path: "/chores/new", name: "chores-new", component: ChoresNew },
   { path: "/user_chores/new", name: "user-chores-new", component: UserChoresNew},
-  { path: "/users/", name: "users-index", component: UsersIndex},
+  { path: "/users", name: "users-index", component: UsersIndex},
 ]
 
 const router = new VueRouter({

@@ -28,6 +28,18 @@
 </template>
 
 <style>
+  .suggestions {
+    background-image: url(https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80);
+/*    background-size: fill;
+*/    padding-bottom: 600px;
+    color: white;
+    background-position: 0px -300px;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000
+    }
 </style>
 
 <script>

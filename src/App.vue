@@ -17,9 +17,9 @@
             <!-- End Responsive Toggle Button -->
 
             <!-- Logo -->
-            <a href="../../todo" class="navbar-brand d-flex">
+            <router-link to="/todo" class="navbar-brand d-flex">
               <div class="logo">Tidy</div>
-            </a>
+            </router-link>
              
             <!-- End Logo -->
 
@@ -28,7 +28,7 @@
               <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
                 <!-- Intro -->
                 <li class="nav-item  g-mx-10--lg g-mx-15--xl">
-                  <a href="../../users" class="nav-link g-py-7 g-px-0">House</a>
+                  <router-link to="/users" class="nav-link g-py-7 g-px-0">House</router-link>
                 </li>
                 <!-- End Intro -->
 
@@ -40,13 +40,13 @@
                   <ul class="hs-sub-menu list-unstyled u-shadow-v11 g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-mt-18 g-mt-8--lg--scrolling" id="nav-submenu--features" aria-labelledby="nav-link--features">
                     <!-- Features - Headers -->
                     <li class="dropdown-item ">
-                      <a class="nav-link" href="../../chores/new">Suggest Chore</a>
+                      <router-link class="nav-link" to="/chores/new">Suggest Chore</router-link>
                     </li>
                     <!-- End Features - Headers -->
 
                     <!-- Features - Promo blocks -->
                     <li class="dropdown-item ">
-                      <a class="nav-link" href="../../suggestions">Review</a>
+                      <router-link class="nav-link" to="/suggestions">Review</router-link>
                     </li>
                     <!-- End Features - Promo blocks -->
                   </ul>
@@ -54,7 +54,7 @@
                 <!-- End Features -->
                 
                 <li class="nav-item  g-mx-10--lg g-mx-15--xl">
-                  <a href="../../user_chores/new" class="nav-link g-py-7 g-px-0">Draft</a>
+                  <router-link to="/user_chores/new" class="nav-link g-py-7 g-px-0">Draft</router-link>
                 </li>
 
               </ul>
@@ -64,7 +64,7 @@
             <!-- End Navigation -->
 
             <div class="d-inline-block g-hidden-md-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
-              <a class="btn u-btn-outline-primary g-font-size-13 text-uppercase g-py-10 g-px-15" href="../../logout">Logout</a>
+              <router-link class="btn u-btn-outline-primary g-font-size-13 text-uppercase g-py-10 g-px-15" to="/logout">Logout</router-link>
             </div>
           </div>
         </nav>
@@ -322,4 +322,67 @@
 div.logo {
   font-size: 250%;
 }
+
+.suggest-chore {
+  background-image: url(https://images.unsplash.com/photo-1534551767192-78b8dd45b51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80);
+  background-size: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /*width: 50%;*/
+}
+
+#tasks {
+  background-image: url(https://images.unsplash.com/photo-1527176930608-09cb256ab504?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2853&q=80);
+  background-size: contain;
+
+}
+
+.house-name {
+  font-size: 300%;
+  padding-left: 165px;
+/*  color: white;
+  text-shadow:
+    -1px -1px 0 #A6A1A1,
+    1px -1px 0 #A6A1A1,
+    -1px 1px 0 #A6A1A1,
+    1px 1px 0 #A6A1A1*/
+}
+
+.house-id {
+  padding-left: 170px;
+}
+
+.housemate-name {
+  font-size: 290%;
+  /*color: white;*/
+/*  text-shadow:
+    -1px -1px 0 #A6A1A1,
+    1px -1px 0 #A6A1A1,
+    -1px 1px 0 #A6A1A1,
+    1px 1px 0 #A6A1A1*/
+}
+
+.housemate-chores {
+  background-color: rgba(220,220,220, .7); 
+  /*color: white;*/
+  /*text-shadow:
+    -1px -1px 0 #73716D,
+    1px -1px 0 #73716D,
+    -1px 1px 0 #73716D,
+    1px 1px 0 #73716D*/
+
+}
+
+.users-index {
+  background-image: url(https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80);
+  background-size: 100%;
+  background-position: 50px -250px;
+  padding-bottom: 500px;
+}
+
+#chore-box {
+  margin-block-end: -55px;
+}
+
+
 </style>
